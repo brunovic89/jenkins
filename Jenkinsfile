@@ -34,8 +34,8 @@ pipeline {
 						while ($SERVICE.Status -ne "Stopped" -and $tentativa -le 3) {
 							$DATE = Get-Date -Format "dd/MM/yyyy - HH:mm:ss"
 							$SERVICE = Get-Service "Tomcat8"
-							Write-Host "TENTANDO PARA O SERVIÇO"
-							"$DATE - TENTANDO PARA O SERVIÇO" >> $LOG | Out-Null
+							Write-Host "TENTANDO PARAR O SERVIÇO"
+							"$DATE - TENTANDO PARAR O SERVIÇO" >> $LOG | Out-Null
 							Start-Sleep 10
 							$tentativa += 1
 						}
@@ -84,7 +84,7 @@ pipeline {
 							
 					} 
 					else {
-						"NÃO EXISTE O PACOTE, SAINDO DO SCRIPT"
+						"O PACOTE INFORMADO NAO EXITE, POR FAVOR VERIFIQUE"
 						pause
 					}
 					'''
@@ -104,9 +104,9 @@ pipeline {
                           $res = $_.Exception.Response
                       }
                       if ( [int]$res.StatusCode -eq "200" -or $res.StatusCode -eq "301" -or $res.StatusCode -eq "401")
-                       {"validação da $url realizada com sucesso"}
+                       {"validação da URL: $url realizada com sucesso"}
                        else {
-                       "Falha na validação da $url, por favor verifique o ambiente "}
+                       "Falha na validação da URL: $url, por favor verifique o ambiente "}
 					   '''
 					}
 				}
