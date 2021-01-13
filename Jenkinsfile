@@ -18,7 +18,7 @@ pipeline {
 				$FILE = $env:PACOTE
 				$URL = $env:URL
 				$DATESTAMP = get-date -uformat "%Y%m%d@%H-%M-%S"
-				$TESTE_PACOTE = Test-Path "$DEPLOY_APP\$FILE.war"
+				$TESTE_PACOTE = Test-Path "$DEPLOY_APP\\$FILE.war"
 				$LOG = "$TOMCAT_HOME\\log_deploy.txt"
 				$DATE = Get-Date -Format "dd/MM/yyyy - HH:mm:ss"
 				
