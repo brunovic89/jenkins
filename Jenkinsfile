@@ -1,8 +1,8 @@
 pipeline { 
     agent {label 'master'}
 		parameters {
-				string(name: 'PACOTE', defaultValue: '', description: 'INSIRA O NOME DA APLICÃO PARA DEPLOY')
-				string(name: 'URL',defaultValue: '', description: 'INSIRA A URL DA APLICAÇÃO EX: http://host:porta/contexto')
+				string(name: 'PACOTE', defaultValue: '', description: 'INSIRA O NOME DA APLICAO PARA DEPLOY')
+				string(name: 'URL',defaultValue: '', description: 'INSIRA A URL DA APLICACAO EX: http://host:porta/contexto')
 				booleanParam(name: 'NOVO_PACOTE', defaultValue: false, description: 'CASO SEJA DEPLOY DE UMA APLICACAO NOVA, MARQUE ESTA OPCAO')
 				}
     stages { 
@@ -40,15 +40,15 @@ pipeline {
 				while ($SERVICE.Status -ne "Stopped" -and $tentativa -le 3) {
 				$DATE = Get-Date -Format "dd/MM/yyyy - HH:mm:ss"
 				$SERVICE = Get-Service "Tomcat8"
-				Write-Host "TENTANDO PARAR O SERVIÇO"
-				"$DATE - TENTANDO PARAR O SERVIÇO" >> $LOG | Out-Null
+				Write-Host "TENTANDO PARAR O SERVICO"
+				"$DATE - TENTANDO PARAR O SERVICO" >> $LOG | Out-Null
 				Start-Sleep 10
 				$tentativa += 1
 				}
 							
 				if ($tentativa -eq 4) {
 				$DATE = Get-Date -Format "dd/MM/yyyy - HH:mm:ss"
-				"$DATE - NÃO FOI POSSIVEL PARAR O TOMCAT" >> $LOG | Out-Null
+				"$DATE - NAO FOI POSSIVEL PARAR O TOMCAT" >> $LOG | Out-Null
 				exit
 				}
 								
@@ -61,8 +61,8 @@ pipeline {
 				$DATE = Get-Date -Format "dd/MM/yyyy - HH:mm:ss"
 				$SERVICE = Get-Service $SERVICE_NAME
 				$STATUS_SERVICE = $SERVICE.Status
-				Write-Host "O SERVIÇO ESTA $STATUS_SERVICE" 
-				"$DATE - O SERVIÇO ESTA $STATUS_SERVICE" >> $LOG | Out-Null
+				Write-Host "O SERVICO ESTA $STATUS_SERVICE" 
+				"$DATE - O SERVICO ESTA $STATUS_SERVICE" >> $LOG | Out-Null
 												
 				Write-Host "COPIANDO NOVO PACOTE $FILE"
 				"$DATE - COPIANDO NOVO PACOTE $FILE" >> $LOG | Out-Null
@@ -76,16 +76,16 @@ pipeline {
 				$SERVICE = Get-Service $SERVICE_NAME
 				$STATUS_SERVICE = $SERVICE.Status
 				if ( $STATUS_SERVICE -eq "Running") {
-				"O SERVIÇO ESTA EM EXECUÇÃO - STATUS ATUAL = $STATUS_SERVICE"
-				"$DATE - O SERVIÇO ESTA EM EXECUÇÃO - STATUS ATUAL = $STATUS_SERVICE" >> $LOG | Out-Null
+				"O SERVICO ESTA EM EXECUCAO - STATUS ATUAL = $STATUS_SERVICE"
+				"$DATE - O SERVICO ESTA EM EXECUCAO - STATUS ATUAL = $STATUS_SERVICE" >> $LOG | Out-Null
 				} 
 				else {
-				"O SERVIÇO NÃO INICIOU, FAVOR VERIFICAR - STATUS ATUAL = $STATUS_SERVICE"
-				"$DATE - O SERVIÇO NÃO INICIOU, FAVOR VERIFICAR - STATUS ATUAL = $STATUS_SERVICE" >> $LOG | Out-Null
+				"O SERVICO NAO INICIOU, FAVOR VERIFICAR - STATUS ATUAL = $STATUS_SERVICE"
+				"$DATE - O SERVICO NAO INICIOU, FAVOR VERIFICAR - STATUS ATUAL = $STATUS_SERVICE" >> $LOG | Out-Null
 				exit
 				}
 									
-				Write-Host "INICIANDO VALIDAÇÃO DA URL"
+				Write-Host "INICIANDO VALIDACAO DA URL"
 				sleep 10
 				
 				$req = [system.Net.WebRequest]::Create($URL)
@@ -97,12 +97,12 @@ pipeline {
 				}
 				
 				if ( [int]$res.StatusCode -eq "200" -or $res.StatusCode -eq "301" -or $res.StatusCode -eq "401")
-				{"VALIDAÇÃO DA URL: $URL REALIZADA COM SUCESSO"
-				"$DATE - VALIDAÇÃO DA URL: $URL REALIZADA COM SUCESSO" >> $LOG | Out-Null
+				{"VALIDACAO DA URL: $URL REALIZADA COM SUCESSO"
+				"$DATE - VALIDACAO DA URL: $URL REALIZADA COM SUCESSO" >> $LOG | Out-Null
 				}
 				else {
-				"VALIDAÇAO DA URL: $URL REALIZADA COM FALHA, VERIFIQUE O AMBIENTE" 
-				"$DATE - VALIDAÇAO DA URL: $URL REALIZADA COM FALHA, VERIFIQUE O AMBIENTE" >> $LOG | Out-Null
+				"VALIDACAO DA URL: $URL REALIZADA COM FALHA, VERIFIQUE O AMBIENTE" 
+				"$DATE - VALIDACAO DA URL: $URL REALIZADA COM FALHA, VERIFIQUE O AMBIENTE" >> $LOG | Out-Null
 				exit
 				}
 										
@@ -123,15 +123,15 @@ pipeline {
 				while ($SERVICE.Status -ne "Stopped" -and $tentativa -le 3) {
 				$DATE = Get-Date -Format "dd/MM/yyyy - HH:mm:ss"
 				$SERVICE = Get-Service "Tomcat8"
-				Write-Host "TENTANDO PARAR O SERVIÇO"
-				"$DATE - TENTANDO PARAR O SERVIÇO" >> $LOG | Out-Null
+				Write-Host "TENTANDO PARAR O SERVICO"
+				"$DATE - TENTANDO PARAR O SERVICO" >> $LOG | Out-Null
 				Start-Sleep 10
 				$tentativa += 1
 				}
 								
 				if ($tentativa -eq 4) {
 				$DATE = Get-Date -Format "dd/MM/yyyy - HH:mm:ss"
-				"$DATE - NÃO FOI POSSIVEL PARAR O TOMCAT" >> $LOG | Out-Null
+				"$DATE - NAO FOI POSSIVEL PARAR O TOMCAT" >> $LOG | Out-Null
 				exit
 				}
 								
@@ -144,8 +144,8 @@ pipeline {
 				$DATE = Get-Date -Format "dd/MM/yyyy - HH:mm:ss"
 				$SERVICE = Get-Service $SERVICE_NAME
 				$STATUS_SERVICE = $SERVICE.Status
-				Write-Host "O SERVIÇO ESTA $STATUS_SERVICE" 
-				"$DATE - O SERVIÇO ESTA $STATUS_SERVICE" >> $LOG | Out-Null
+				Write-Host "O SERVICO ESTA $STATUS_SERVICE" 
+				"$DATE - O SERVICO ESTA $STATUS_SERVICE" >> $LOG | Out-Null
 								
 				Write-Host "FAZENDO O BACKUP DO PACOTE $FILE"
 				"$DATE - FAZENDO O BACKUP DO PACOTE $FILE" >> $LOG | Out-Null
@@ -164,17 +164,17 @@ pipeline {
 				$SERVICE = Get-Service $SERVICE_NAME
 				$STATUS_SERVICE = $SERVICE.Status
 				if ( $STATUS_SERVICE -eq "Running") {
-				"O SERVIÇO ESTA EM EXECUÇÃO - STATUS ATUAL = $STATUS_SERVICE"
-				"$DATE - O SERVIÇO ESTA EM EXECUÇÃO - STATUS ATUAL = $STATUS_SERVICE" >> $LOG | Out-Null
+				"O SERVICO ESTA EM EXECUCAO - STATUS ATUAL = $STATUS_SERVICE"
+				"$DATE - O SERVICO ESTA EM EXECUCAO - STATUS ATUAL = $STATUS_SERVICE" >> $LOG | Out-Null
 				} 
 				
 				else {
-				"O SERVIÇO NÃO INICIOU, FAVOR VERIFICAR - STATUS ATUAL = $STATUS_SERVICE"
-				"$DATE - O SERVIÇO NÃO INICIOU, FAVOR VERIFICAR - STATUS ATUAL = $STATUS_SERVICE" >> $LOG | Out-Null
+				"O SERVICO NAO INICIOU, FAVOR VERIFICAR - STATUS ATUAL = $STATUS_SERVICE"
+				"$DATE - O SERVICO NAO INICIOU, FAVOR VERIFICAR - STATUS ATUAL = $STATUS_SERVICE" >> $LOG | Out-Null
 				exit
 				}
 									
-				Write-Host "INICIANDO VALIDAÇÃO DA URL"
+				Write-Host "INICIANDO VALIDACAO DA URL"
 				sleep 10
 				$req = [system.Net.WebRequest]::Create($URL)
 				try {
@@ -185,13 +185,13 @@ pipeline {
 				}
 				
 				if ( [int]$res.StatusCode -eq "200" -or $res.StatusCode -eq "301" -or $res.StatusCode -eq "401"){
-				"VALIDAÇÃO DA URL: $URL REALIZADA COM SUCESSO"
-				"$DATE - VALIDAÇÃO DA URL: $URL REALIZADA COM SUCESSO" >> $LOG | Out-Null
+				"VALIDACAO DA URL: $URL REALIZADA COM SUCESSO"
+				"$DATE - VALIDACAO DA URL: $URL REALIZADA COM SUCESSO" >> $LOG | Out-Null
 				}
 				
 				else {
-				"VALIDAÇAO DA URL: $URL REALIZADA COM FALHA, VERIFIQUE O AMBIENTE" 
-				"$DATE - VALIDAÇAO DA URL: $URL REALIZADA COM FALHA, VERIFIQUE O AMBIENTE" >> $LOG | Out-Null
+				"VALIDACAO DA URL: $URL REALIZADA COM FALHA, VERIFIQUE O AMBIENTE" 
+				"$DATE - VALIDACAO DA URL: $URL REALIZADA COM FALHA, VERIFIQUE O AMBIENTE" >> $LOG | Out-Null
 				exit
 				}
 										
@@ -203,8 +203,8 @@ pipeline {
 				}
 				
 				elseif ($NOVO -eq $true -and $TESTE_PACOTE -eq $true -and $RESULT_PACOTE -eq $true) {
-				"O PACOTE INFORMADO JÁ EXISTE NO AMBIENTE, VERIFIQUE SE REALMENTE É UM NOVA APLICAÇÃO QUE SERA INSTALADA"
-				"$DATE - O PACOTE INFORMADO JÁ EXISTE NO AMBIENTE, VERIFIQUE SE REALMENTE É UM NOVA APLICAÇÃO QUE SERA INSTALADA" >> $LOG | Out-Null
+				"O PACOTE INFORMADO JA EXISTE NO AMBIENTE, VERIFIQUE SE REALMENTE E UM NOVA APLICACAO QUE SERA INSTALADA"
+				"$DATE - O PACOTE INFORMADO JA EXISTE NO AMBIENTE, VERIFIQUE SE REALMENTE E UMA NOVA APLICACAO QUE SERA INSTALADA" >> $LOG | Out-Null
 				}
 				
 				elseif ($NOVO -eq $false -and $TESTE_PACOTE -eq $false) {
@@ -213,8 +213,8 @@ pipeline {
 				}
 				
 				elseif ($NOVO -eq $false -and $TESTE_PACOTE -eq $true -and $RESULT_PACOTE -eq $false) {
-				"O PACOTE INFORMADO NÃO ESTA INSTALADO NO AMBIENTE, VERIFIQUE SE NAO SE TRATA DE UMA NOVA APLICAÇÃO"
-				"$DATE - O PACOTE INFORMADO NÃO ESTA INSTALADO NO AMBIENTE, VERIFIQUE SE NAO SE TRATA DE UMA NOVA APLICAÇÃO" >> $LOG | Out-Null
+				"O PACOTE INFORMADO NAO ESTA INSTALADO NO AMBIENTE, VERIFIQUE SE NAO SE TRATA DE UMA NOVA APLICACAO"
+				"$DATE - O PACOTE INFORMADO NAO ESTA INSTALADO NO AMBIENTE, VERIFIQUE SE NAO SE TRATA DE UMA NOVA APLICACAO" >> $LOG | Out-Null
 				}
 				
 				else {
